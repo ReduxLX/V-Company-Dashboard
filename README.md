@@ -12,8 +12,8 @@ Currently it has the following planned features:
 
 ## Built With
 
-[Vue.js (2.x)](https://vuejs.org)
-[BootstrapVue](https://bootstrap-vue.org/)
-[HTML + CSS](https://html.com/)
-[JavaScript](https://www.javascript.com/)
-[Employee API](http://dummy.restapiexample.com/)
+* [Vue.js (2.x)](https://vuejs.org)
+* [BootstrapVue](https://bootstrap-vue.org/)
+* [HTML + CSS](https://html.com/)
+* [JavaScript](https://www.javascript.com/)
+* [Employee API](http://dummy.restapiexample.com/)
