@@ -1,4 +1,4 @@
-# V-Dashboard Web App
+# V-Dashboard Web
 
 ## About The Project
 
