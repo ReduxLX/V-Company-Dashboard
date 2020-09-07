@@ -5,25 +5,27 @@
       <div class="calculator-screen">
         {{displayNumber()}}
         <br />
-        {{displayEquation()}}
+        <p
+          :class="equation.length <= 20 ? 'med-text': 'small-text'"
+        >{{displayEquation() || "equation"}}</p>
       </div>
       <div class="calculator-row">
         <b-button class="calculator-button" @click="clearDisplay" squared>CE</b-button>
         <b-button class="calculator-button" @click="deleteDisplay" squared>DEL</b-button>
         <b-button class="calculator-button" @click="clearMemory" squared>C</b-button>
         <b-button
-          class="calculator-opbutton"
+          class="calculator-button large-text"
           @click="inputOperator('x')"
           variant="warning"
           squared
-        >X</b-button>
+        >x</b-button>
       </div>
       <div class="calculator-row">
         <b-button class="calculator-button" @click="inputDigit('7')" block squared>7</b-button>
         <b-button class="calculator-button" @click="inputDigit('8')" squared>8</b-button>
         <b-button class="calculator-button" @click="inputDigit('9')" squared>9</b-button>
         <b-button
-          class="calculator-opbutton"
+          class="calculator-button large-text"
           @click="inputOperator('/')"
           variant="warning"
           squared
@@ -34,7 +36,7 @@
         <b-button class="calculator-button" @click="inputDigit('5')" squared>5</b-button>
         <b-button class="calculator-button" @click="inputDigit('6')" squared>6</b-button>
         <b-button
-          class="calculator-opbutton"
+          class="calculator-button large-text"
           @click="inputOperator('-')"
           variant="warning"
           squared
@@ -45,7 +47,7 @@
         <b-button class="calculator-button" @click="inputDigit('2')" squared>2</b-button>
         <b-button class="calculator-button" @click="inputDigit('3')" squared>3</b-button>
         <b-button
-          class="calculator-opbutton"
+          class="calculator-button large-text"
           @click="inputOperator('+')"
           variant="warning"
           squared
@@ -53,8 +55,13 @@
       </div>
       <div class="calculator-row">
         <b-button class="calculator-button" @click="inputDigit(0)" squared>0</b-button>
-        <b-button class="calculator-wide-button" @click="inputDot" squared>.</b-button>
-        <b-button class="calculator-button" @click="inputEqual" variant="warning" squared>=</b-button>
+        <b-button class="calculator-wide-button large-text" @click="inputDot" squared>.</b-button>
+        <b-button
+          class="calculator-button large-text"
+          @click="inputEqual"
+          variant="warning"
+          squared
+        >=</b-button>
       </div>
     </div>
   </div>
@@ -70,7 +77,9 @@ export default {
       equation: "",
       operator: null,
       operatorSelected: false,
-      finishOperation: false
+      finishOperation: false,
+      buttonClass: "button-class",
+      operatorTextClass: "operator-text"
     };
   },
   methods: {
@@ -190,11 +199,13 @@ export default {
   width: 300px;
   margin: 0 auto;
   text-align: center;
+  border: 1px solid black;
 }
 .calculator-screen {
   height: 60px;
   width: 100%;
   color: white;
+  font-size: 18px;
   background: #1e1e1e;
   border: none;
   text-align: right;
@@ -205,19 +216,21 @@ export default {
 .calculator-button {
   width: 100px;
   height: 60px;
+  border: 1px solid black;
 }
-.calculator-button:hover {
-  color: white;
-}
-.calculator-opbutton {
-  width: 100px;
-  height: 60px;
-  border: none;
-}
-
 .calculator-wide-button {
-  width: 215px;
+  width: 213px;
   height: 60px;
+  border: 1px solid black;
+}
+.large-text {
+  font-size: 20px;
+}
+.med-text {
+  font-size: 15px;
+}
+.small-text {
+  font-size: 13px;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
