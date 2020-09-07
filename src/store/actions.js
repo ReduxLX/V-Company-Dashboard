@@ -1,1 +1,5 @@
-export default {};
+export default {
+  setAuthentication: ({ commit }, status) => {
+    commit('setAuthentication', status);
+  },
+};
