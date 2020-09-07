@@ -2,7 +2,11 @@
   <div>
     <h1>Die Arithmetik Maschine</h1>
     <div class="calculator">
-      <div class="calculator-screen">{{displayNumber()}}</div>
+      <div class="calculator-screen">
+        {{displayNumber()}}
+        <br />
+        {{displayEquation()}}
+      </div>
       <div class="calculator-row">
         <b-button class="calculator-button" @click="clearDisplay" squared>CE</b-button>
         <b-button class="calculator-button" @click="deleteDisplay" squared>DEL</b-button>
@@ -10,7 +14,6 @@
         <b-button
           class="calculator-opbutton"
           @click="inputOperator('x')"
-          :disabled="waitingForSecondNum"
           variant="warning"
           squared
         >X</b-button>
@@ -22,7 +25,6 @@
         <b-button
           class="calculator-opbutton"
           @click="inputOperator('/')"
-          :disabled="waitingForSecondNum"
           variant="warning"
           squared
         >/</b-button>
@@ -34,7 +36,6 @@
         <b-button
           class="calculator-opbutton"
           @click="inputOperator('-')"
-          :disabled="waitingForSecondNum"
           variant="warning"
           squared
         >-</b-button>
@@ -46,7 +47,6 @@
         <b-button
           class="calculator-opbutton"
           @click="inputOperator('+')"
-          :disabled="waitingForSecondNum"
           variant="warning"
           squared
         >+</b-button>
@@ -67,8 +67,10 @@ export default {
     return {
       firstOperand: "",
       secondOperand: "",
+      equation: "",
       operator: null,
-      operatorSelected: false
+      operatorSelected: false,
+      finishOperation: false
     };
   },
   methods: {
@@ -88,21 +90,39 @@ export default {
     },
     displayNumber() {
       let displayNum = this.operator ? this.secondOperand : this.firstOperand;
-      return displayNum || 0;
+      return displayNum || "0";
+    },
+    displayEquation() {
+      return this.equation;
     },
     inputDigit(digit) {
       this.operatorSelected = false;
       let currentOperand = this.operator ? "secondOperand" : "firstOperand";
       if (
-        this[currentOperand] === 0 ||
+        this[currentOperand] === "0" ||
         isNaN(parseFloat(this[currentOperand]))
       ) {
-        this[currentOperand] = digit;
+        this[currentOperand] = "" + digit;
       } else {
         this[currentOperand] += digit;
       }
     },
     inputOperator(nextOperator) {
+      if (this.finishOperation) {
+        this.equation = "";
+        this.finishOperation = false;
+      }
+      if (this.operatorSelected) {
+        this.equation = this.equation.slice(0, -1);
+        this.equation += nextOperator.toString();
+      } else if (this.operator) {
+        this.secondOperand = this.secondOperand ? this.secondOperand : "0";
+        this.equation += this.secondOperand + nextOperator.toString();
+      } else {
+        this.firstOperand = this.firstOperand ? this.firstOperand : "0";
+        this.equation += this.firstOperand + nextOperator.toString();
+      }
+
       if (this.operator && !this.operatorSelected) {
         this.compute();
       }
@@ -110,15 +130,18 @@ export default {
       this.operator = nextOperator;
     },
     inputEqual() {
-      if (this.operator) {
+      if (this.operator && !this.operatorSelected) {
+        this.equation += this.secondOperand + "=";
         this.compute(this.operator, this.result, this.value);
         this.operator = null;
+        this.finishOperation = true;
       }
     },
     inputDot() {
       if (this.operator && !this.secondOperand.includes(".")) {
         this.secondOperand += this.secondOperand ? "." : "0.";
       } else if (!this.firstOperand.includes(".")) {
+        console.log("h");
         this.firstOperand += this.firstOperand ? "." : "0.";
       }
     },
@@ -135,7 +158,6 @@ export default {
         this.firstOperand = "" + num1 / num2;
       }
       this.secondOperand = "";
-      this.operator = "";
     },
     clearDisplay() {
       if (this.operator) {
@@ -147,8 +169,10 @@ export default {
     clearMemory() {
       this.firstOperand = "";
       this.secondOperand = "";
+      this.equation = "";
       this.operator = null;
       this.operatorSelected = false;
+      this.finishOperation = false;
     },
     deleteDisplay() {
       if (this.operator) {
