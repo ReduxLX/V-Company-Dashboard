@@ -67,7 +67,8 @@ export default {
     return {
       firstOperand: "",
       secondOperand: "",
-      operator: null
+      operator: null,
+      operatorSelected: false
     };
   },
   methods: {
@@ -90,17 +91,22 @@ export default {
       return displayNum || 0;
     },
     inputDigit(digit) {
+      this.operatorSelected = false;
       let currentOperand = this.operator ? "secondOperand" : "firstOperand";
-      if (this[currentOperand] === 0) {
+      if (
+        this[currentOperand] === 0 ||
+        isNaN(parseFloat(this[currentOperand]))
+      ) {
         this[currentOperand] = digit;
       } else {
         this[currentOperand] += digit;
       }
     },
     inputOperator(nextOperator) {
-      if (this.operator) {
+      if (this.operator && !this.operatorSelected) {
         this.compute();
       }
+      this.operatorSelected = true;
       this.operator = nextOperator;
     },
     inputEqual() {
@@ -111,9 +117,9 @@ export default {
     },
     inputDot() {
       if (this.operator && !this.secondOperand.includes(".")) {
-        this.secondOperand += ".";
+        this.secondOperand += this.secondOperand ? "." : "0.";
       } else if (!this.firstOperand.includes(".")) {
-        this.firstOperand += "0.";
+        this.firstOperand += this.firstOperand ? "." : "0.";
       }
     },
     compute() {
@@ -142,6 +148,7 @@ export default {
       this.firstOperand = "";
       this.secondOperand = "";
       this.operator = null;
+      this.operatorSelected = false;
     },
     deleteDisplay() {
       if (this.operator) {
