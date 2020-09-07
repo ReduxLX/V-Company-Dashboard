@@ -7,10 +7,14 @@
 </template>
 
 <script>
-import Calculator from "@/components/Calculator";
+import Calculator from '@/components/Calculator';
+import analytics from '@/functions/generalFunctions';
 export default {
   components: {
     Calculator
+  },
+  mounted() {
+    analytics.incrementLocalStorageParam('visited_calculator');
   }
 };
 </script>

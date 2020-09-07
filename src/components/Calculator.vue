@@ -60,17 +60,18 @@
 </template>
 
 <script>
+import analytics from '@/functions/generalFunctions';
 export default {
   data() {
     return {
-      firstOperand: "",
-      secondOperand: "",
-      equation: "",
+      firstOperand: '',
+      secondOperand: '',
+      equation: '',
       operator: null,
       operatorSelected: false,
       finishOperation: false,
-      buttonClass: "button-class",
-      operatorTextClass: "operator-text"
+      buttonClass: 'button-class',
+      operatorTextClass: 'operator-text'
     };
   },
   methods: {
@@ -90,36 +91,36 @@ export default {
     },
     displayNumber() {
       let displayNum = this.operator ? this.secondOperand : this.firstOperand;
-      return displayNum || "0";
+      return displayNum || '0';
     },
     displayEquation() {
       return this.equation;
     },
     inputDigit(digit) {
       this.operatorSelected = false;
-      let currentOperand = this.operator ? "secondOperand" : "firstOperand";
+      let currentOperand = this.operator ? 'secondOperand' : 'firstOperand';
       if (
-        this[currentOperand] === "0" ||
+        this[currentOperand] === '0' ||
         isNaN(parseFloat(this[currentOperand]))
       ) {
-        this[currentOperand] = "" + digit;
+        this[currentOperand] = '' + digit;
       } else {
         this[currentOperand] += digit;
       }
     },
     inputOperator(nextOperator) {
       if (this.finishOperation) {
-        this.equation = "";
+        this.equation = '';
         this.finishOperation = false;
       }
       if (this.operatorSelected) {
         this.equation = this.equation.slice(0, -1);
         this.equation += nextOperator.toString();
       } else if (this.operator) {
-        this.secondOperand = this.secondOperand ? this.secondOperand : "0";
+        this.secondOperand = this.secondOperand ? this.secondOperand : '0';
         this.equation += this.secondOperand + nextOperator.toString();
       } else {
-        this.firstOperand = this.firstOperand ? this.firstOperand : "0";
+        this.firstOperand = this.firstOperand ? this.firstOperand : '0';
         this.equation += this.firstOperand + nextOperator.toString();
       }
 
@@ -131,45 +132,46 @@ export default {
     },
     inputEqual() {
       if (this.operator && !this.operatorSelected) {
-        this.equation += this.secondOperand + "=";
+        this.equation += this.secondOperand + '=';
         this.compute(this.operator, this.result, this.value);
         this.operator = null;
         this.finishOperation = true;
+        analytics.incrementLocalStorageParam('equations');
       }
     },
     inputDot() {
-      if (this.operator && !this.secondOperand.includes(".")) {
-        this.secondOperand += this.secondOperand ? "." : "0.";
-      } else if (!this.firstOperand.includes(".")) {
-        console.log("h");
-        this.firstOperand += this.firstOperand ? "." : "0.";
+      if (this.operator && !this.secondOperand.includes('.')) {
+        this.secondOperand += this.secondOperand ? '.' : '0.';
+      } else if (!this.firstOperand.includes('.')) {
+        console.log('h');
+        this.firstOperand += this.firstOperand ? '.' : '0.';
       }
     },
     compute() {
       let num1 = parseFloat(this.firstOperand) || 0,
         num2 = parseFloat(this.secondOperand) || 0;
-      if (this.operator == "+") {
-        this.firstOperand = "" + (num1 + num2);
-      } else if (this.operator == "-") {
-        this.firstOperand = "" + (num1 - num2);
-      } else if (this.operator == "x") {
-        this.firstOperand = "" + num1 * num2;
-      } else if (this.operator == "/") {
-        this.firstOperand = "" + num1 / num2;
+      if (this.operator == '+') {
+        this.firstOperand = '' + (num1 + num2);
+      } else if (this.operator == '-') {
+        this.firstOperand = '' + (num1 - num2);
+      } else if (this.operator == 'x') {
+        this.firstOperand = '' + num1 * num2;
+      } else if (this.operator == '/') {
+        this.firstOperand = '' + num1 / num2;
       }
-      this.secondOperand = "";
+      this.secondOperand = '';
     },
     clearDisplay() {
       if (this.operator) {
-        this.secondOperand = "";
+        this.secondOperand = '';
       } else {
-        this.firstOperand = "";
+        this.firstOperand = '';
       }
     },
     clearMemory() {
-      this.firstOperand = "";
-      this.secondOperand = "";
-      this.equation = "";
+      this.firstOperand = '';
+      this.secondOperand = '';
+      this.equation = '';
       this.operator = null;
       this.operatorSelected = false;
       this.finishOperation = false;
@@ -230,7 +232,7 @@ input::-webkit-inner-spin-button {
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield; /* Firefox */
 }
 </style>

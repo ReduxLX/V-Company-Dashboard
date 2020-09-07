@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center">
     <b-container fluid>
       <b-row class="mb-0">
         <label for="input-small">Username</label>
@@ -15,6 +15,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import analytics from '@/functions/generalFunctions';
 export default {
   props: {
     hideModal: Function
@@ -28,14 +29,12 @@ export default {
       if (this.username == '1' && this.password == '1') {
         this.setAuthentication(true);
         this.hideModal();
-        let totalLogins = localStorage.getItem('logins');
-        if (totalLogins) {
-          localStorage.setItem('logins', parseInt(totalLogins) + 1);
-        } else {
-          localStorage.setItem('logins', 0);
-        }
+        analytics.incrementLocalStorageParam('logins');
+        // incrementLocalStorageParam('logins');
       } else {
         this.failedLogin = true;
+        this.username = '';
+        this.password = '';
       }
     }
   },
@@ -50,5 +49,8 @@ export default {
   margin: auto;
   margin-top: 10px;
   display: block;
+}
+.text-center {
+  text-align: center;
 }
 </style>

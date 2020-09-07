@@ -53,16 +53,17 @@
 
 <script>
 // import { mapState } from "vuex";
-import employeesJSON from "@/data/employees";
+import employeesJSON from '@/data/employees';
+import analytics from '@/functions/generalFunctions';
 export default {
   data() {
     return {
       employees: employeesJSON[0].data,
       fields: [
-        { key: "id", label: "ID", sortable: true },
-        { key: "employee_name", label: "Full Name", sortable: true },
-        { key: "employee_salary", label: "Salary ($)", sortable: true },
-        { key: "employee_age", label: "Age", sortable: true }
+        { key: 'id', label: 'ID', sortable: true },
+        { key: 'employee_name', label: 'Full Name', sortable: true },
+        { key: 'employee_salary', label: 'Salary ($)', sortable: true },
+        { key: 'employee_age', label: 'Age', sortable: true }
       ],
       fetchingAPI: false,
       pageOptions: [3, 5, 10, 100],
@@ -73,6 +74,7 @@ export default {
   },
   mounted: function() {
     this.totalRows = this.employees.length;
+    analytics.incrementLocalStorageParam('visited_employees');
     //     // Fetch Employee Records from external API
     //     this.fetchingAPI = true;
     //     fetch("http://dummy.restapiexample.com/api/v1/employees", {

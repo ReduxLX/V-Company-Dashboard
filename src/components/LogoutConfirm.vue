@@ -7,6 +7,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import analytics from '@/functions/generalFunctions';
 export default {
   props: {
     hideModal: Function
@@ -15,6 +16,7 @@ export default {
     ...mapActions(['setAuthentication']),
     logout() {
       this.setAuthentication(false);
+      analytics.incrementLocalStorageParam('logouts');
       this.hideModal();
     }
   },

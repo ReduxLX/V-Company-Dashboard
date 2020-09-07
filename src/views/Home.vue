@@ -6,7 +6,11 @@
 </template>
 
 <script>
+import analytics from '@/functions/generalFunctions';
 export default {
-  name: "Home"
+  name: 'Home',
+  mounted() {
+    analytics.incrementLocalStorageParam('visited_home');
+  }
 };
 </script>
