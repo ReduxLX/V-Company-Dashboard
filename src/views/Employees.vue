@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="employees">
     <h1>The Workforce</h1>
     <div class="spinner-border" role="status" v-if="fetchingAPI">
       <span class="sr-only">Loading...</span>
@@ -35,6 +35,7 @@
       </b-container>
       <!------------------ Employee Table ------------------>
       <b-table
+        class="table"
         striped
         hover
         :items="employees"
@@ -90,3 +91,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.employees {
+  margin: 20px auto;
+}
+.table {
+  margin: 20px auto;
+  width: 75%;
+}
+</style>

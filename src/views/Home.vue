@@ -14,3 +14,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.home {
+  height: 100vh;
+  background-image: url(../assets/home.jpg);
+}
+</style>

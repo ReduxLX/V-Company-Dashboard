@@ -190,7 +190,6 @@ export default {
 <style scoped>
 .calculator {
   width: 300px;
-  margin: 0 auto;
   text-align: center;
   border: 1px solid black;
 }
