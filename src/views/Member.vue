@@ -16,7 +16,7 @@
         </b-card-group>
       </div>
 
-      <b-button variant="warning">Delete Activity</b-button>
+      <b-button variant="warning" @click="clearRoutes">Delete Activity</b-button>
     </b-jumbotron>
     <b-jumbotron bg-variant="danger" text-variant="white">
       <template v-slot:header>Calculator Activity</template>
@@ -34,7 +34,7 @@
         </b-card-group>
       </div>
 
-      <b-button variant="warning" href="#">Delete Activity</b-button>
+      <b-button variant="warning" @click="clearCalculator">Delete Activity</b-button>
     </b-jumbotron>
   </div>
 </template>
@@ -60,6 +60,16 @@ export default {
       routes: [],
       calculator: []
     };
+  },
+  methods: {
+    clearRoutes() {
+      this.routeItems.forEach(item => localStorage.removeItem(item.key, 0));
+      this.$router.go();
+    },
+    clearCalculator() {
+      this.calcItems.forEach(item => localStorage.removeItem(item.key, 0));
+      this.$router.go();
+    }
   },
   mounted() {
     analytics.incrementLocalStorageParam('visited_member');
