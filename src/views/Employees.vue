@@ -80,7 +80,9 @@ export default {
         return response.json();
       })
       .then(responseJson => {
-        this.employees = responseJson.data;
+        responseJson.data.forEach(element => {
+          this.employees.push(element);
+        });
       });
     fetch('https://reqres.in/api/users?page=2', {
       method: 'get'
