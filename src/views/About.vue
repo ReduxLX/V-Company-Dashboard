@@ -12,9 +12,9 @@
           He decided to do something productive over the weekend other
           than watching Youtube videos and so started learning the Javascript framework Vue.js
         </p>
-        <hr />
+        <hr class="hr" />
         <p>This is the result of those 2 days.</p>
-        <hr />
+        <hr class="hr" />
       </div>
       <p>Our products are created, designed and implemented using the following technologies</p>
       <b-list-group class="list">
@@ -61,6 +61,9 @@ export default {
   margin: auto;
   margin-top: 10px;
   display: block;
+}
+.hr {
+  border: 1px solid gold;
 }
 </style>
 

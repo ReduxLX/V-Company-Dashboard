@@ -1,13 +1,6 @@
 <template>
   <div class="employees">
     <h1>The Workforce</h1>
-    <div class="spinner-border" role="status" v-if="fetchingAPI">
-      <span class="sr-only">Loading...</span>
-    </div>
-    <p v-if="fetchingAPI">
-      Fetching from API...
-      <br />Please refresh if fetching takes too long
-    </p>
     <!------------------ Table Controls ------------------>
     <div>
       <b-container fluid>
@@ -33,6 +26,14 @@
           </b-col>
         </b-row>
       </b-container>
+      <!------------------ Loading ------------------>
+      <div class="spinner-border" role="status" v-if="fetchingAPI">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <p v-if="fetchingAPI">
+        Fetching from API...
+        <br />Please refresh if fetching takes too long
+      </p>
       <!------------------ Employee Table ------------------>
       <b-table
         class="table"
@@ -53,13 +54,11 @@
 </template>
 
 <script>
-// import { mapState } from "vuex";
-import employeesJSON from '@/data/employees';
 import analytics from '@/functions/generalFunctions';
 export default {
   data() {
     return {
-      employees: employeesJSON[0].data,
+      employees: {},
       fields: [
         { key: 'id', label: 'ID', sortable: true },
         { key: 'employee_name', label: 'Full Name', sortable: true },
@@ -76,18 +75,18 @@ export default {
   mounted: function() {
     this.totalRows = this.employees.length;
     analytics.incrementLocalStorageParam('visited_employees');
-    //     // Fetch Employee Records from external API
-    //     this.fetchingAPI = true;
-    //     fetch("http://dummy.restapiexample.com/api/v1/employees", {
-    //       method: "get"
-    //     })
-    //       .then(response => {
-    //         return response.json();
-    //       })
-    //       .then(responseJson => {
-    //         this.employees = responseJson.data;
-    //         this.fetchingAPI = false;
-    //       });
+    // Fetch Employee Records from external API
+    this.fetchingAPI = true;
+    fetch('http://dummy.restapiexample.com/api/v1/employees', {
+      method: 'get'
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(responseJson => {
+        this.employees = responseJson.data;
+        this.fetchingAPI = false;
+      });
   }
 };
 </script>
