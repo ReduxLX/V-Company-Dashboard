@@ -10,7 +10,10 @@
               <b-dropdown-item to="/calculator">Calculator</b-dropdown-item>
             </b-nav-item-dropdown>
             <b-nav-item to="/about">About Us</b-nav-item>
-            <b-nav-item to="/member" @click="makeToast('danger')">Members Only</b-nav-item>
+            <b-nav-item
+              to="/member"
+              @click="!authenticated ? makeToast('danger') : null"
+            >Members Only</b-nav-item>
           </ul>
         </div>
         <div class="navbar-collapse">
@@ -89,18 +92,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: purple;
-    }
-  }
 }
 </style>

@@ -97,6 +97,7 @@ export default {
       return this.equation;
     },
     inputDigit(digit) {
+      analytics.incrementLocalStorageParam('digits');
       this.operatorSelected = false;
       let currentOperand = this.operator ? 'secondOperand' : 'firstOperand';
       if (
@@ -109,6 +110,7 @@ export default {
       }
     },
     inputOperator(nextOperator) {
+      analytics.incrementLocalStorageParam('operators');
       if (this.finishOperation) {
         this.equation = '';
         this.finishOperation = false;
@@ -169,6 +171,7 @@ export default {
       }
     },
     clearMemory() {
+      analytics.incrementLocalStorageParam('clearMemory');
       this.firstOperand = '';
       this.secondOperand = '';
       this.equation = '';
@@ -191,7 +194,6 @@ export default {
 .calculator {
   width: 300px;
   text-align: center;
-  border: 1px solid black;
 }
 .calculator-screen {
   height: 60px;

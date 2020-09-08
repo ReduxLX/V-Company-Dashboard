@@ -94,7 +94,9 @@ export default {
 
 <style scoped>
 .employees {
-  margin: 20px auto;
+  min-height: 100vh;
+  background-color: #eaeaea;
+  padding: 20px 0px;
 }
 .table {
   margin: 20px auto;

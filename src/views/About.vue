@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <div>
+      <br />
       <h1>About Konstantine Technologies</h1>
       <div class="text">
         <p>
@@ -9,9 +10,11 @@
         </p>
         <p>
           He decided to do something productive over the weekend other
-          than watching Youtube videos and so started learning the Vue.js framework over the weeekend
+          than watching Youtube videos and so started learning the Javascript framework Vue.js
         </p>
+        <hr />
         <p>This is the result of those 2 days.</p>
+        <hr />
       </div>
       <p>Our products are created, designed and implemented using the following technologies</p>
       <b-list-group class="list">
@@ -27,7 +30,6 @@
       <br />
       <br />
       <br />
-      <p>| Copyright Konstantine Technologies 2020 |</p>
     </div>
   </div>
 </template>
@@ -43,7 +45,9 @@ export default {
 
 <style scoped>
 .about {
-  margin: 20px 0px;
+  min-height: 100vh;
+  background-color: #343a40;
+  color: white;
 }
 .text {
   width: 50%;
@@ -57,9 +61,6 @@ export default {
   margin: auto;
   margin-top: 10px;
   display: block;
-}
-.text-center {
-  text-align: center;
 }
 </style>
 

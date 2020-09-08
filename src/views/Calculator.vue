@@ -1,9 +1,9 @@
 <template>
   <div class="calculator">
+    <br />
     <h1>Die Arithmetik Maschine</h1>
     <Calculator />
   </div>
-  <!-- Calculator -->
 </template>
 
 <script>
@@ -21,6 +21,8 @@ export default {
 
 <style scoped>
 .calculator {
-  margin: 20px auto;
+  margin: 0px auto;
+  min-height: 100vh;
+  background-color: #eaeaea;
 }
 </style>

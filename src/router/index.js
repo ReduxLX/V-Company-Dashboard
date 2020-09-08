@@ -38,7 +38,7 @@ const routes = [
       if (state.authenticated) {
         next();
       } else {
-        next(false);
+        next();
       }
     }
   }
