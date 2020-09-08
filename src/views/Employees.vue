@@ -55,7 +55,7 @@ import analytics from '@/functions/generalFunctions';
 export default {
   data() {
     return {
-      employees: {},
+      employees: [],
       fields: [
         { key: 'id', label: 'ID', sortable: true },
         { key: 'first_name', label: 'Full Name', sortable: true },
@@ -89,7 +89,6 @@ export default {
         return response.json();
       })
       .then(responseJson => {
-        console.log(responseJson);
         responseJson.data.forEach(element => {
           this.employees.push(element);
         });

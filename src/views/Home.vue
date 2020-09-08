@@ -37,8 +37,8 @@ export default {
   background-image: url(../assets/home.jpg);
 }
 .btn {
-  margin: auto 30px;
-  width: 15%;
+  margin: auto 5px;
+  width: 20%;
 }
 
 .deck {
