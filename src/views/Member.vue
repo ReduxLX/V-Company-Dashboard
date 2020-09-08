@@ -55,7 +55,7 @@ export default {
         { key: 'digits', title: 'Digits Pressed' },
         { key: 'operators', title: 'Operators Used' },
         { key: 'equations', title: 'Equations Generated' },
-        { key: 'clearMemory', title: 'Displays Cleared' }
+        { key: 'displays', title: 'Displays Cleared' }
       ],
       routes: [],
       calculator: []
