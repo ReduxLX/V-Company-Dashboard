@@ -1,5 +1,6 @@
 # V-Dashboard Web
 
+<img src="assets/logo4.png" alt="Logo" width="80" height="80">
 ## About The Project
 
 V-Dashboard is a mock web application which simulates a solutions company website.

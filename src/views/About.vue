@@ -6,14 +6,15 @@
       <div class="text">
         <p>
           Konstantine Technologies dates back to one late Friday evening after its creator, Alfons Fernaldy, finished
-          eating some delicious fruits.
+          eating some delicious fruits
         </p>
         <p>
           He decided to do something productive over the weekend other
           than watching Youtube videos and so started learning the Javascript framework Vue.js
         </p>
         <hr class="hr" />
-        <p>This is the result of those 2 days.</p>
+        <p>This webapp is the result of those 2 days</p>
+        <b-button variant="success" href="https://github.com/ReduxLX/V-Dashboard">GitHub Source Code</b-button>
         <hr class="hr" />
       </div>
       <p>Our products are created, designed and implemented using the following technologies</p>
@@ -27,8 +28,6 @@
           variant="danger"
         >Vue Devtools</b-list-group-item>
       </b-list-group>
-      <br />
-      <br />
       <br />
     </div>
   </div>
@@ -46,6 +45,7 @@ export default {
 <style scoped>
 .about {
   min-height: 100vh;
+  padding-bottom: 20px;
   background-color: #343a40;
   color: white;
 }

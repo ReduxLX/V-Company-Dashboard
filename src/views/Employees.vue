@@ -44,12 +44,9 @@
         :current-page="currentPage"
         :per-page="perPage"
         v-if="fetchingAPI === false"
-      >
-        <template v-slot:cell(name)="data">
-          <router-link :to="`/employee/${data.id}`">{{ data.employee_name }}</router-link>
-        </template>
-      </b-table>
+      ></b-table>
     </div>
+    <a href="https://reqres.in/api/users?page=1">Source API</a>
   </div>
 </template>
 
@@ -61,9 +58,9 @@ export default {
       employees: {},
       fields: [
         { key: 'id', label: 'ID', sortable: true },
-        { key: 'employee_name', label: 'Full Name', sortable: true },
-        { key: 'employee_salary', label: 'Salary ($)', sortable: true },
-        { key: 'employee_age', label: 'Age', sortable: true }
+        { key: 'first_name', label: 'Full Name', sortable: true },
+        { key: 'last_name', label: 'Last Name', sortable: true },
+        { key: 'email', label: 'Email', sortable: true }
       ],
       fetchingAPI: false,
       pageOptions: [3, 5, 10, 100],
@@ -76,7 +73,7 @@ export default {
     analytics.incrementLocalStorageParam('visited_employees');
     // Fetch Employee Records from external API
     this.fetchingAPI = true;
-    fetch('http://dummy.restapiexample.com/api/v1/employees', {
+    fetch('https://reqres.in/api/users?page=1', {
       method: 'get'
     })
       .then(response => {
@@ -84,6 +81,18 @@ export default {
       })
       .then(responseJson => {
         this.employees = responseJson.data;
+      });
+    fetch('https://reqres.in/api/users?page=2', {
+      method: 'get'
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(responseJson => {
+        console.log(responseJson);
+        responseJson.data.forEach(element => {
+          this.employees.push(element);
+        });
         this.fetchingAPI = false;
         this.totalRows = this.employees.length;
       });
